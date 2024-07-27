@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .form-control {
+      background-color: #333;
+      color: #fff;
+      border: none;
+    }
+    .form-control::placeholder {
+      color: #ccc; /
+    }
+    .form-control:focus {
+      background-color: #333;
+      color: #fff;
+    }
+    .table-hover tbody tr:hover {
+      background-color: #e9ecef;
+    }
+    .thead-dark {
+      background-color: #343a40;
+      color: #fff;
+    }
+    .btn-primary {
+      background-color: #001f3b;
+      border-color: #343a40;
+    }
+    .btn-custom {
+      width: auto;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+    }
+  </style>
+
+<div class="col-md-6 offset-md-3">
+<h1>Modifica Angajat</h1>
+<br/>
+
+<form method="POST">
+    {% csrf_token %}
+
+
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary btn-custom">Salveaza</button>
+</form>
+
+
+
+
+
+{% endblock %}

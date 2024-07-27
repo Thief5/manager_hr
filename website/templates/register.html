@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f5f5f5;
+  }
+  .form-control {
+    background-color: #333;
+    color: #fff;
+    border: none;
+  }
+  .form-control::placeholder {
+    color: #ccc;
+  }
+  .form-control:focus {
+    background-color: #333;
+    color: #fff;
+  }
+  .btn-secondary {
+    background-color: #001f3b;
+    border-color: #343a40;
+  }
+  .form-container {
+    max-width: 500px;
+    margin: auto;
+  }
+</style>
+
+<div class="col-md-6 offset-md-3">
+  <h1>Register</h1>
+  <br/>
+  
+  <form method="POST" action="">
+    {% csrf_token %}
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          Your Form Has Errors
+          {% for field in form %}
+            {% if field.errors %}
+              {{ field.errors }}
+            {% endif %}
+          {% endfor %}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+  
+    {{ form.as_p }}
+  
+    <br/>
+      <button type="submit" class="btn btn-secondary">Register</button>
+    </form>
+  
+  
+  
+  </div>
+  
+  {% endblock %}

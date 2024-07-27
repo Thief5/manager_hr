@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f5f5f5;
+  }
+  .form-control {
+    background-color: #333;
+    color: #fff;
+    border: none;
+  }
+  .form-control::placeholder {
+    color: #ccc; /
+  }
+  .form-control:focus {
+    background-color: #333;
+    color: #fff;
+  }
+  .table-hover tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  .thead-dark {
+    background-color: #343a40;
+    color: #fff;
+  }
+  .btn-primary {
+    background-color: #001f3b;
+    border-color: #343a40;
+  }
+  .btn-custom {
+    width: auto;
+  }
+  .form-container {
+    max-width: 500px;
+    margin: auto;
+  }
+</style>
+
+{% if user.is_authenticated %}
+
+<h1 class="text-center mb-4">Angajati</h1>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Data</th>
+        <th scope="col">Nume</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nr.telefon</th>
+        <th scope="col">Departament</th>
+        <th scope="col">Nivel</th>
+        <th scope="col">Salariu Net</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if utilizatori %}
+          {% for utilizator in utilizatori %}
+          <tr>
+              <td><a href="{% url 'detalii' utilizator.id %}">{{ utilizator.id }}</a></td>
+              <td>{{ utilizator.created_at }}</td>
+              <td>{{ utilizator.first_name }} {{ utilizator.last_name }}</td>
+              <td>{{ utilizator.email }}</td>
+              <td>{{ utilizator.phone }}</td>
+              <td>{{ utilizator.departament }}</td>
+              <td>{{ utilizator.nivel }}</td>
+              <td>{{ utilizator.salariu }}</td>
+          </tr>
+          {% endfor %}
+      {% else %}
+          <tr>
+              <td colspan="8" class="text-center">Nu exista angajatori creati</td>
+          </tr>
+      {% endif %}
+    </tbody>
+</table>
+
+{% else %}
+
+<h1 class="text-center mb-4">Login</h1>
+
+<div class="form-container">
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <br/>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-custom">Done</button>
+    </form>
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}
